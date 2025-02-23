@@ -39,46 +39,20 @@ async def jira_webhook(request: Request):
             f"*Assignee:* {assignee}"
         )
 
-        # Format Slack payload
-        slack_payload = {
-            "text": message,
-            "blocks": [
-                {
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": f"🚨 *High-Priority Task Created!*"
-                    }
-                },
-                {
-                    "type": "section",
-                    "fields": [
-                        {
-                            "type": "mrkdwn",
-                            "text": f"*Task:* `{issue_key}` - {issue_summary}"
-                        },
-                        {
-                            "type": "mrkdwn",
-                            "text": f"*Priority:* {issue_priority}"
-                        },
-                        {
-                            "type": "mrkdwn",
-                            "text": f"*Assignee:* {assignee}"
-                        }
-                    ]
-                }
-            ]
+        # Format payload for Telex
+        telex_payload = {
+            "text": message  
         }
 
-        # Send notification to Slack
+        # Send notification to Telex
         slack_webhook_url = settings.SLACK_WEBHOOK_URL
         async with httpx.AsyncClient() as client:
-            response = await client.post(slack_webhook_url, json=slack_payload)
+            response = await client.post(slack_webhook_url, json=telex_payload)
             response.raise_for_status()
-            logging.info(f"Slack API response: {response.status_code} - {response.text}")
+            logging.info(f"Telex API response: {response.status_code} - {response.text}")
 
-        logging.info("High-priority notification sent to Slack successfully!")
-        return {"status": "success", "message": "Notification sent to Slack."}
+        logging.info("High-priority notification sent to Telex successfully!")
+        return {"status": "success", "message": "Notification sent to Telex."}
 
     except Exception as e:
         logging.error(f"Error processing Jira webhook: {str(e)}")
