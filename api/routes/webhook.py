@@ -51,6 +51,8 @@ async def jira_webhook(request: Request):
         async with httpx.AsyncClient() as client:
             response = await client.post(slack_webhook_url, json=telex_payload)
             response.raise_for_status()
+            response_json = await response.json()
+            print(response_json)
             logging.info(f"Telex API response: {response.status_code} - {response.text}")
 
         logging.info("High-priority notification sent to Telex successfully!")
