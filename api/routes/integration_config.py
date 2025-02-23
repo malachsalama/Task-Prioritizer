@@ -34,7 +34,7 @@ integration_json = {
         "default": "high priority task"
       }
     ],
-    "target_url": settings.TELEX_WEBHOOK_URL,
+    "target_url": settings.SLACK_WEBHOOK_URL,
     "tick_url": settings.TICK_URL
   }
 }
