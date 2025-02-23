@@ -22,40 +22,12 @@ integration_json = {
     "integration_type": "modifier",
     "integration_category": "Monitoring & Logging",
     "key_features": [
-      "priority tracking",
-      "slack integration",
-      "jira sync",
       "automated alerts",
-      "task filtering",
-      "team notifications",
+      "priority tasks",
       "real-time updates"
     ],
     "author": "Malach Salama",
     "settings": [
-      {
-        "label": "Slack Channel",
-        "type": "text",
-        "required": True,
-        "default": "#High-Priority-Task"
-      },
-      {
-        "label": "Event Type",
-        "type": "dropdown",
-        "required": True,
-        "default": "ci_pipeline",
-        "options": [
-          "ci_pipeline",
-          "cd_pipeline",
-          "deployment",
-          "error"
-        ]
-      },
-      {
-        "label": "Message Format",
-        "type": "text",
-        "required": True,
-        "default": "Task-Prioritizer"
-      },
       {
         "label": "Time Interval",
         "type": "dropdown",
@@ -63,12 +35,18 @@ integration_json = {
         "default": "Immediate",
         "options": [
           "Immediate",
-          "Every 5 mins",
+          "Every 5-mins",
           "Hourly"
         ]
       },
       {
-        "label": "Include Logs",
+        "label": "slack channel",
+        "type": "text",
+        "required": True,
+        "default": "High priority tasks"
+      },
+      {
+        "label": "Logs",
         "type": "checkbox",
         "required": True,
         "default": "True"
