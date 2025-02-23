@@ -33,10 +33,9 @@ async def jira_webhook(request: Request):
 
         # Format notification message
         message = (
-            f"🚨 *High-Priority Task Created!*\n"
-            f"*Task:* `{issue_key}` - {issue_summary}\n"
-            f"*Priority:* {issue_priority}\n"
-            f"*Assignee:* {assignee}"
+            f"High-Priority Task Created: {issue_key} - {issue_summary}\n"
+            f"Priority: {issue_priority}\n"
+            f"Assignee: {assignee}"
         )
 
         # Format payload for Telex
