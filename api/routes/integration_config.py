@@ -22,13 +22,13 @@ integration_json = {
     "integration_type": "modifier",
     "integration_category": "Monitoring & Logging",
     "key_features": [
-    "priority tracking",
-    "slack integration",
-    "jira sync",
-    "automated alerts",
-    "task filtering",
-    "team notifications",
-    "real-time updates"
+      "priority tracking",
+      "slack integration",
+      "jira sync",
+      "automated alerts",
+      "task filtering",
+      "team notifications",
+      "real-time updates"
     ],
     "author": "Malach Salama",
     "settings": [
@@ -36,7 +36,7 @@ integration_json = {
         "label": "Slack Channel",
         "type": "text",
         "required": True,
-        "default": "#custom-alerts"
+        "default": "#High-Priority-Task"
       },
       {
         "label": "Event Type",
@@ -51,16 +51,10 @@ integration_json = {
         ]
       },
       {
-        "label": "Include Logs",
-        "type": "checkbox",
-        "required": True,
-        "default": "true"
-      },
-      {
         "label": "Message Format",
         "type": "text",
         "required": True,
-        "default": "Task Prioritizer"
+        "default": "Task-Prioritizer"
       },
       {
         "label": "Time Interval",
@@ -72,10 +66,16 @@ integration_json = {
           "Every 5 mins",
           "Hourly"
         ]
+      },
+      {
+        "label": "Include Logs",
+        "type": "checkbox",
+        "required": True,
+        "default": "True"
       }
     ],
     "target_url": settings.TELEX_WEBHOOK_URL,
-    "tick_url": settings.TICK_URL,
+    "tick_url": settings.TICK_URL
   }
 }
 
