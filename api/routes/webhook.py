@@ -24,9 +24,12 @@ async def jira_webhook(request: Request):
         issue_priority = issue.get("fields", {}).get("priority", {}).get("name", "Unknown")
         assignee = issue.get("fields", {}).get("assignee", {}).get("displayName", "Unassigned")
 
-        # Only notify for high-priority issues
-        if issue_priority.lower() not in ["high", "urgent", "critical"]:
-            return {"status": "ignored", "message": "Issue priority is not high"}
+        # Log issue details
+        logging.info(f"Issue details - Key: {issue_key}, Summary: {issue_summary}, Priority: {issue_priority}, Assignee: {assignee}")
+
+        # Only notify for high or medium priority issues
+        if issue_priority.lower() not in ["high", "urgent", "critical", "medium"]:
+            return {"status": "ignored", "message": "Issue priority is not high or medium"}
 
         # Format notification message
         message = (
@@ -36,14 +39,46 @@ async def jira_webhook(request: Request):
             f"*Assignee:* {assignee}"
         )
 
-        # Send notification to Telex
+        # Format Slack payload
+        slack_payload = {
+            "text": message,
+            "blocks": [
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": f"🚨 *High-Priority Task Created!*"
+                    }
+                },
+                {
+                    "type": "section",
+                    "fields": [
+                        {
+                            "type": "mrkdwn",
+                            "text": f"*Task:* `{issue_key}` - {issue_summary}"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": f"*Priority:* {issue_priority}"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": f"*Assignee:* {assignee}"
+                        }
+                    ]
+                }
+            ]
+        }
+
+        # Send notification to Slack
         slack_webhook_url = settings.SLACK_WEBHOOK_URL
         async with httpx.AsyncClient() as client:
-            response = await client.post(slack_webhook_url, json={"text": message})
+            response = await client.post(slack_webhook_url, json=slack_payload)
             response.raise_for_status()
+            logging.info(f"Slack API response: {response.status_code} - {response.text}")
 
-        logging.info("High-priority notification sent to Telex successfully!")
-        return {"status": "success", "message": "Notification sent to Telex."}
+        logging.info("High-priority notification sent to Slack successfully!")
+        return {"status": "success", "message": "Notification sent to Slack."}
 
     except Exception as e:
         logging.error(f"Error processing Jira webhook: {str(e)}")
