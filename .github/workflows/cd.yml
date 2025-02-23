@@ -30,7 +30,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem ubuntu@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem ec2-user@${{ secrets.SSH_HOST }} << 'EOF'
             cd /home/ubuntu/interval-custom-integration-task-prioritization
             git pull origin main
             source venv/bin/activate
