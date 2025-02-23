@@ -41,7 +41,10 @@ async def jira_webhook(request: Request):
 
         # Format payload for Telex
         telex_payload = {
-            "text": message  
+            "event_name": "jira_issue_created",
+            "username": "Jira Bot",
+            "status": "alert",
+            "message": message
         }
 
         # Send notification to Telex
