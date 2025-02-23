@@ -15,7 +15,7 @@ integration_json = {
       "app_name": "Task Prioritizer",
       "app_description": "A custom integration that automatically notifies slack team members of High priority tasks from jira",
       "app_logo": "https://iili.io/dmHVsZG.png",
-      "app_url": "ec2-51-20-251-125.eu-north-1.compute.amazonaws.com",
+      "app_url": "https://ec2-51-20-251-125.eu-north-1.compute.amazonaws.com",
       "background_color": "#fff"
     },
     "is_active": True,
@@ -49,7 +49,7 @@ integration_json = {
         "label": "Logs",
         "type": "checkbox",
         "required": True,
-        "default": "True"
+        "default": "true"
       }
     ],
     "target_url": settings.TELEX_WEBHOOK_URL,
