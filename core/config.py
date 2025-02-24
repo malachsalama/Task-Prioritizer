@@ -14,8 +14,8 @@ class Settings(BaseSettings):
     SECRET_KEY: str = secrets.token_urlsafe(32)
     DEBUG: bool = False
     TESTING: bool = False
-    EC2_PUBLIC_IP: str = os.getenv("EC2_PUBLIC_IP", "ec2-51-20-251-125.eu-north-1.compute.amazonaws.com")
-    TICK_URL: str = os.getenv("TICK_URL", f"https://{EC2_PUBLIC_IP}/jira-webhook")
+    # EC2_PUBLIC_IP: str = os.getenv("EC2_PUBLIC_IP", "ec2-51-20-251-125.eu-north-1.compute.amazonaws.com")
+    TICK_URL: str = os.getenv("TICK_URL")
     TELEX_WEBHOOK_URL: str = os.getenv("TELEX_WEBHOOK_URL", "")
 
 
