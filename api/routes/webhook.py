@@ -33,23 +33,24 @@ async def jira_webhook(request: Request):
 
         # Format notification message
         message = (
-            f"High-Priority Task Created: {issue_key} - {issue_summary}\n"
-            f"Priority: {issue_priority}\n"
-            f"Assignee: {assignee}"
+            f"🚨 *High-Priority Task Created!*\n"
+            f"*Task:* `{issue_key}` - {issue_summary}\n"
+            f"*Priority:* {issue_priority}\n"
+            f"*Assignee:* {assignee}"
         )
 
         # Format payload for Telex
         telex_payload = {
             "event_name": "jira_issue_created",
             "username": "Jira Bot",
-            "status": "alert",
+            "status": "success",
             "message": message
         }
 
         # Send notification to Telex
-        slack_webhook_url = settings.SLACK_WEBHOOK_URL
+        telex_webhook_url = settings.TELEX_WEBHOOK_URL
         async with httpx.AsyncClient() as client:
-            response = await client.post(slack_webhook_url, json=telex_payload)
+            response = await client.post(telex_webhook_url, json=telex_payload)
             response.raise_for_status()
             logging.info(f"Telex API response: {response.status_code} - {response.text}")
 

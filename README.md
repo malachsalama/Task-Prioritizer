@@ -31,8 +31,8 @@ pip install -r requirements.txt
 Create a `.env` file in the project root and define:
 
 ```ini
-TICK_URL=your_server_url/jira-webhook
-SLACK_WEBHOOK_URL=telex-channel-url
+TICK_URL=https://ec2-51-20-251-125.eu-north-1.compute.amazonaws.com/jira-webhook
+TELEX_WEBHOOK_URL=https://ping.telex.im/v1/webhooks/01951eae-6cb0-720c-bfd5-0a345fae22fa
 ```
 
 ### 4. Run the Application
@@ -50,17 +50,22 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 Send a test request to the webhook endpoint:
 
 ```bash
-curl -X POST   https://task-prioritizer.onrender.com/api/v1/jira-webhook   -H 'Content-Type: application/json'   -d '{
+curl -X POST "https://task-prioritizer.onrender.com/api/v1/jira-webhook" \
+-H "Content-Type: application/json" \
+-d '{
   "webhookEvent": "jira:issue_created",
   "issue": {
     "key": "TEST-123",
     "fields": {
-      "summary": "Test issue from Jira.",
-      "priority": { "name": "High" },
-      "assignee": { "displayName": "Malach Salama" }
+      "summary": "Treat this task urgently!",
+      "priority": {
+        "name": "High"
+      },
+      "assignee": {
+        "displayName": "Malach Salama"
+      }
     }
-  },
-  "webhookUrl": "https://task-prioritizer.onrender.com/api/v1/jira-webhook"
+  }
 }'
 ```
 
