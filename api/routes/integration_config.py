@@ -13,7 +13,7 @@ integration_json = {
     },
     "descriptions": {
       "app_name": "Task Prioritizer",
-      "app_description": "A custom integration that automatically notifies slack team members of High priority tasks from jira",
+      "app_description": "A custom integration that automatically notifies Telex team members of High priority tasks from jira",
       "app_logo": "https://iili.io/dmHVsZG.png",
       "app_url": "https://task-prioritizer.onrender.com",
       "background_color": "#fff"
@@ -22,16 +22,17 @@ integration_json = {
     "integration_type": "output",
     "integration_category": "Project Management",
     "key_features": [
-      "auto alerts",
-      "realtime updates"
+      "Auto alerts for high-priority Jira issues",
+      "Seamless integration with Telex",
+      "Realtime updates"
     ],
     "author": "Malach Salama",
     "settings": [
       {
-        "label": "slack channel",
+        "label": "task-prioritizer",
         "type": "text",
         "required": True,
-        "default": "high priority task"
+        "default": "High priority task"
       }
     ],
     "target_url": settings.TELEX_WEBHOOK_URL,
