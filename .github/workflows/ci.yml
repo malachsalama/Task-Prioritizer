@@ -8,6 +8,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      TICK_URL: ${{ secrets.TICK_URL }}
+      TELEX_WEBHOOK_URL: ${{ secrets.TELEX_WEBHOOK_URL }}
 
     steps:
       - name: Checkout Repository
