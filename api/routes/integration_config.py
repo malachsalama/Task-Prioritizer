@@ -1,8 +1,6 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from core.config import settings
-
 router = APIRouter()
 
 integration_json = {
@@ -35,7 +33,7 @@ integration_json = {
         "default": "High priority task"
       }
     ],
-    "target_url": settings.TELEX_WEBHOOK_URL,
+    "target_url": "https://ping.telex.im/v1/webhooks/01951eae-6cb0-720c-bfd5-0a345fae22fa",
   }
 }
 @router.get("/integration-config")
