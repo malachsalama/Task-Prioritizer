@@ -19,8 +19,8 @@ integration_json = {
       "background_color": "#fff"
     },
     "is_active": True,
-    "integration_type": "modifier",
-    "integration_category": "Monitoring & Logging",
+    "integration_type": "output",
+    "integration_category": "Project Management",
     "key_features": [
       "auto alerts",
       "realtime updates"
@@ -35,7 +35,6 @@ integration_json = {
       }
     ],
     "target_url": settings.TELEX_WEBHOOK_URL,
-    "tick_url": settings.TICK_URL
   }
 }
 @router.get("/integration-config")
