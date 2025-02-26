@@ -2,7 +2,7 @@
 
 ## Overview
 
-Task Prioritizer is a FastAPI-based integration that detects overdue tasks from Jira and notifies team members automatically. This helps ensure that high-priority issues get the attention they need.
+Task Prioritizer is a FastAPI-based integration that detects high priority tasks from Jira and notifies telex team members automatically. This helps ensure that high-priority issues get the attention they need.
 
 ## Features
 
@@ -31,7 +31,6 @@ pip install -r requirements.txt
 Create a `.env` file in the project root and define:
 
 ```ini
-TICK_URL=https://ec2-51-20-251-125.eu-north-1.compute.amazonaws.com/jira-webhook
 TELEX_WEBHOOK_URL=https://ping.telex.im/v1/webhooks/01951eae-6cb0-720c-bfd5-0a345fae22fa
 ```
 
